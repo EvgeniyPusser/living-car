@@ -1,0 +1,109 @@
+<mujoco model="Living Car">
+  <compiler angle="radian"/>
+
+  <option timestep="0.001" tolerance="1e-10" gravity="0 0 0" integrator="implicitfast" iterations="80">
+    <flag energy="enable"/>
+  </option>
+
+  <default>
+    <geom conaffinity="2" friction="0.25 0.005 0.001" solref="0.008" solimp="0.95 0.99"/>
+  </default>
+
+  <worldbody>
+    <geom name="barrier" size="8 0.18 0.65" pos="0 1.35 0.75" type="box" contype="2" conaffinity="1" rgba="0.8 0.48 0.16 1" mass="0"/>
+    <body name="chassis" pos="0 -0.4 0.72">
+      <joint name="x" type="slide" axis="1 0 0"/>
+      <joint name="y" type="slide" axis="0 1 0"/>
+      <joint name="yaw" damping="120"/>
+      <geom name="floor" size="2.05 0.7 0.1" pos="-0.1 0 -0.22" type="box" rgba="0.17 0.23 0.29 1" mass="850"/>
+      <geom name="passenger_cell" size="0.98 0.66 0.45" pos="-0.25 0 0.3" type="box" rgba="0.22 0.7 0.68 0.24" mass="350"/>
+      <body name="front_crush" pos="2.05 0 -0.02">
+        <joint name="front_crush" type="slide" stiffness="220000" range="-0.01 0.45" damping="3500" axis="-1 0 0"/>
+        <geom name="front_crush" size="0.14 0.86 0.25" type="box" rgba="0.2 0.58 0.6 1" mass="45"/>
+      </body>
+      <body name="rear_crush" pos="-2.25 0 -0.02">
+        <joint name="rear_crush" type="slide" stiffness="220000" range="-0.01 0.45" damping="3500" axis="1 0 0"/>
+        <geom name="rear_crush" size="0.14 0.86 0.25" type="box" rgba="0.2 0.58 0.6 1" mass="45"/>
+      </body>
+      <body name="right_0" pos="-1.2 0.92 0.02">
+        <joint name="right_0" type="slide" stiffness="90000" range="-0.012 0.25" damping="1800" axis="0 -1 0"/>
+        <geom name="right_0" size="0.564 0.055 0.27" type="box" rgba="0.2 0.72 0.73 1" mass="16"/>
+        <site name="sensor_right_0" size="0.023" pos="0 0.058 0.12" rgba="0.7 1 0.5 1"/>
+      </body>
+      <body name="right_1" pos="0 0.92 0.02">
+        <joint name="right_1" type="slide" stiffness="90000" range="-0.012 0.25" damping="1800" axis="0 -1 0"/>
+        <geom name="right_1" size="0.564 0.055 0.27" type="box" rgba="0.2 0.72 0.73 1" mass="16"/>
+        <site name="sensor_right_1" size="0.023" pos="0 0.058 0.12" rgba="0.7 1 0.5 1"/>
+      </body>
+      <body name="right_2" pos="1.2 0.92 0.02">
+        <joint name="right_2" type="slide" stiffness="90000" range="-0.012 0.25" damping="1800" axis="0 -1 0"/>
+        <geom name="right_2" size="0.564 0.055 0.27" type="box" rgba="0.2 0.72 0.73 1" mass="16"/>
+        <site name="sensor_right_2" size="0.023" pos="0 0.058 0.12" rgba="0.7 1 0.5 1"/>
+      </body>
+      <body name="left_0" pos="-1.2 -0.92 0.02">
+        <joint name="left_0" type="slide" stiffness="90000" range="-0.012 0.25" damping="1800" axis="0 1 0"/>
+        <geom name="left_0" size="0.564 0.055 0.27" type="box" rgba="0.2 0.72 0.73 1" mass="16"/>
+        <site name="sensor_left_0" size="0.023" pos="0 -0.058 0.12" rgba="0.7 1 0.5 1"/>
+      </body>
+      <body name="left_1" pos="0 -0.92 0.02">
+        <joint name="left_1" type="slide" stiffness="90000" range="-0.012 0.25" damping="1800" axis="0 1 0"/>
+        <geom name="left_1" size="0.564 0.055 0.27" type="box" rgba="0.2 0.72 0.73 1" mass="16"/>
+        <site name="sensor_left_1" size="0.023" pos="0 -0.058 0.12" rgba="0.7 1 0.5 1"/>
+      </body>
+      <body name="left_2" pos="1.2 -0.92 0.02">
+        <joint name="left_2" type="slide" stiffness="90000" range="-0.012 0.25" damping="1800" axis="0 1 0"/>
+        <geom name="left_2" size="0.564 0.055 0.27" type="box" rgba="0.2 0.72 0.73 1" mass="16"/>
+        <site name="sensor_left_2" size="0.023" pos="0 -0.058 0.12" rgba="0.7 1 0.5 1"/>
+      </body>
+      <body name="engine" pos="1.32 0 0">
+        <joint name="engine_track" type="slide" stiffness="210000" range="0 0.06" damping="2800" axis="-0.6 0 -0.8"/>
+        <geom name="engine" size="0.3 0.39 0.23" type="box" contype="0" conaffinity="0" rgba="0.74 0.48 0.23 1" mass="180"/>
+      </body>
+      <body name="wheel_-1.4_-1" pos="-1.4 -0.82 -0.3">
+        <joint type="slide" stiffness="32000" range="-0.06 0.06" damping="1800"/>
+        <geom name="wheel_-1.4_-1" size="0.32 0.12" quat="0.707107 0.707107 0 0" type="cylinder" contype="0" conaffinity="0" rgba="0.09 0.11 0.14 1" mass="22"/>
+      </body>
+      <body name="wheel_-1.4_1" pos="-1.4 0.82 -0.3">
+        <joint type="slide" stiffness="32000" range="-0.06 0.06" damping="1800"/>
+        <geom name="wheel_-1.4_1" size="0.32 0.12" quat="0.707107 0.707107 0 0" type="cylinder" contype="0" conaffinity="0" rgba="0.09 0.11 0.14 1" mass="22"/>
+      </body>
+      <body name="wheel_1.35_-1" pos="1.35 -0.82 -0.3">
+        <joint type="slide" stiffness="32000" range="-0.06 0.06" damping="1800"/>
+        <geom name="wheel_1.35_-1" size="0.32 0.12" quat="0.707107 0.707107 0 0" type="cylinder" contype="0" conaffinity="0" rgba="0.09 0.11 0.14 1" mass="22"/>
+      </body>
+      <body name="wheel_1.35_1" pos="1.35 0.82 -0.3">
+        <joint type="slide" stiffness="32000" range="-0.06 0.06" damping="1800"/>
+        <geom name="wheel_1.35_1" size="0.32 0.12" quat="0.707107 0.707107 0 0" type="cylinder" contype="0" conaffinity="0" rgba="0.09 0.11 0.14 1" mass="22"/>
+      </body>
+    </body>
+  </worldbody>
+
+  <tendon>
+    <fixed name="couple_right_0" stiffness="22000" damping="300" springlength="0">
+      <joint joint="right_0" coef="1"/>
+      <joint joint="right_1" coef="-1"/>
+    </fixed>
+    <fixed name="couple_right_1" stiffness="22000" damping="300" springlength="0">
+      <joint joint="right_1" coef="1"/>
+      <joint joint="right_2" coef="-1"/>
+    </fixed>
+    <fixed name="couple_left_0" stiffness="22000" damping="300" springlength="0">
+      <joint joint="left_0" coef="1"/>
+      <joint joint="left_1" coef="-1"/>
+    </fixed>
+    <fixed name="couple_left_1" stiffness="22000" damping="300" springlength="0">
+      <joint joint="left_1" coef="1"/>
+      <joint joint="left_2" coef="-1"/>
+    </fixed>
+  </tendon>
+
+  <actuator>
+    <general name="motor_right_0" joint="right_0" ctrlrange="-6000 6000" ctrllimited="true"/>
+    <general name="motor_right_1" joint="right_1" ctrlrange="-6000 6000" ctrllimited="true"/>
+    <general name="motor_right_2" joint="right_2" ctrlrange="-6000 6000" ctrllimited="true"/>
+    <general name="motor_left_0" joint="left_0" ctrlrange="-6000 6000" ctrllimited="true"/>
+    <general name="motor_left_1" joint="left_1" ctrlrange="-6000 6000" ctrllimited="true"/>
+    <general name="motor_left_2" joint="left_2" ctrlrange="-6000 6000" ctrllimited="true"/>
+    <general name="motor_engine" joint="engine_track" ctrlrange="-4000 4000" ctrllimited="true"/>
+  </actuator>
+</mujoco>

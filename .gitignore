@@ -17,3 +17,6 @@ node_modules/
 .env.*
 !.env.example
 web-deploy.tar.gz
+living-car-github.zip
+tools/browser/dist/
+tools/browser/standalone/
