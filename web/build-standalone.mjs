@@ -1,0 +1,36 @@
+import {build} from 'esbuild';
+import {readFile,writeFile,mkdir,copyFile} from 'node:fs/promises';
+import {fileURLToPath} from 'node:url';
+import path from 'node:path';
+const root=path.dirname(fileURLToPath(import.meta.url));
+process.chdir(root);
+const wasm=await readFile('node_modules/@mujoco/mujoco/mujoco.wasm');
+const models={};
+for(const scenario of ['side_contact','frontal'])for(const kind of ['living','conventional'])models[`${scenario}-${kind}`]=await readFile(`public/models/${scenario}-${kind}.xml`,'utf8');
+let worker=await readFile('simulation-worker.js','utf8');
+worker=worker.replace("import wasmUrl from '@mujoco/mujoco/mujoco.wasm?url';",'');
+worker=worker.replace("loadMujoco({locateFile:name=>name.endsWith('.wasm')?wasmUrl:name})",`loadMujoco({wasmBinary:Uint8Array.from(atob(${JSON.stringify(wasm.toString('base64'))}),c=>c.charCodeAt(0)),locateFile:()=> 'embedded.wasm'})`);
+worker=worker.replace(/const get=async\(name\)=>\{[^\n]+?return r\.text\(\);\};/,`const embeddedModels=${JSON.stringify(models)};const get=async(name)=>embeddedModels[kind+'-'+name];`);
+const workerBuild=await build({stdin:{contents:worker,resolveDir:root,sourcefile:'embedded-worker.js'},bundle:true,write:false,format:'iife',platform:'browser',target:'es2022',minify:true,external:['module'],define:{'import.meta.url':JSON.stringify('https://embedded.invalid/')}});
+const workerSource=workerBuild.outputFiles[0].text;
+let app=await readFile('app.js','utf8');
+app=app.replace("import './style.css';",'');
+app=app.replace("new Worker(new URL('./simulation-worker.js',import.meta.url),{type:'module'})",()=>`new Worker(URL.createObjectURL(new Blob([${JSON.stringify(workerSource)}],{type:'text/javascript'})))`);
+app=app.replaceAll('import.meta.env.BASE_URL',JSON.stringify('./'));
+// Embedded file links share their own file path; hosted links share the current page.
+app=app.replace("location.origin+location.pathname","location.href");
+const appBuild=await build({stdin:{contents:app,resolveDir:root,sourcefile:'embedded-app.js'},bundle:true,write:false,format:'iife',platform:'browser',target:'es2022',minify:true});
+let html=await readFile('template.html','utf8');
+// Remove external font requests: opening the file should also work offline.
+const css=(await readFile('style.css','utf8')).replace(/^@import[^\n]*\r?\n/,'');
+html=html.replace('</head>',()=>`<style>${css}</style></head>`);
+const script=appBuild.outputFiles[0].text.replace(/<\/script/gi,'<\\/script');
+html=html.replace('<script type="module" src="/app.js"></script>',()=>`<script>${script}</script>`);
+await mkdir('standalone',{recursive:true});
+await writeFile('standalone/index.html',html);
+await writeFile('index.html',html);
+await mkdir('dist',{recursive:true});
+await writeFile('dist/index.html',html);
+await copyFile('standalone/index.html','../Living Car.html');
+await copyFile('standalone/index.html','../docs/index.html');
+console.log(`Created ../Living Car.html — ${(Buffer.byteLength(html)/1024/1024).toFixed(1)} MB; embedded styles, Three.js, MuJoCo WASM and body models. No server or install required.`);

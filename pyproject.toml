@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "living-car"
+version = "0.1.0"
+description = "Living Things / Cloud DNA — reproducible adaptive vehicle-body experiments"
+requires-python = ">=3.11"
+authors = [{name = "Evgenii Bogomazov-Pusser"}]
+dependencies = ["numpy>=2.0,<3", "mujoco>=3.3,<5", "matplotlib>=3.9,<4"]
+
+[project.optional-dependencies]
+desktop = ["pyvista>=0.46,<0.50", "pyvistaqt>=0.11,<0.14", "PySide6>=6.8,<7"]
+test = ["pytest>=8,<10"]
+learning = ["gymnasium>=1.0,<2", "stable-baselines3>=2.6,<3", "torch>=2.6,<3"]
+
+[project.scripts]
+living-car = "living_car.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

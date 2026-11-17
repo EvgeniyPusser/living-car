@@ -1,0 +1,91 @@
+{
+  "observations": [
+    {
+      "genome_id": "408980bf741b",
+      "damage": 0.11283408148544886,
+      "acceleration_g": 1.232931218999544,
+      "damping": 1800.0
+    },
+    {
+      "genome_id": "b9760b1446c4",
+      "damage": 0.10837898769692207,
+      "acceleration_g": 1.227543020128222,
+      "damping": 1997.2483549602937
+    },
+    {
+      "genome_id": "87d23793aea2",
+      "damage": 0.11047816117237898,
+      "acceleration_g": 1.2323400970367007,
+      "damping": 1909.6554691446556
+    }
+  ],
+  "donor": {
+    "genome_id": "b9760b1446c4",
+    "damage": 0.10837898769692207,
+    "acceleration_g": 1.227543020128222,
+    "damping": 1997.2483549602937
+  },
+  "patches": [
+    {
+      "recipient": "408980bf741b",
+      "candidate": "f04ecd2e4ee7",
+      "accepted": false,
+      "before": {
+        "peak_contact_force_n": 22237.882839923626,
+        "mean_residual_damage": 0.14643078403496557,
+        "peak_passenger_acceleration_g": 1.3084234876209335,
+        "total_energy_cost_j": 316.298365931975,
+        "max_protected_intrusion_m": 0.0
+      },
+      "after": {
+        "peak_contact_force_n": 22576.97049286185,
+        "mean_residual_damage": 0.1418007324949808,
+        "peak_passenger_acceleration_g": 1.3495554355626442,
+        "total_energy_cost_j": 307.4940206646634,
+        "max_protected_intrusion_m": 0.0
+      },
+      "reason": "No safe Pareto improvement; patch withheld"
+    },
+    {
+      "recipient": "b9760b1446c4",
+      "candidate": "1f63c253a166",
+      "accepted": false,
+      "before": {
+        "peak_contact_force_n": 22576.97038762017,
+        "mean_residual_damage": 0.14180073180528988,
+        "peak_passenger_acceleration_g": 1.3495554538252028,
+        "total_energy_cost_j": 307.4812917535682,
+        "max_protected_intrusion_m": 0.0
+      },
+      "after": {
+        "peak_contact_force_n": 22576.97038762017,
+        "mean_residual_damage": 0.14180073180528988,
+        "peak_passenger_acceleration_g": 1.3495554538252028,
+        "total_energy_cost_j": 307.4812917535682,
+        "max_protected_intrusion_m": 0.0
+      },
+      "reason": "No safe Pareto improvement; patch withheld"
+    },
+    {
+      "recipient": "87d23793aea2",
+      "candidate": "cc57b783e200",
+      "accepted": false,
+      "before": {
+        "peak_contact_force_n": 22487.07740142578,
+        "mean_residual_damage": 0.14381234471487092,
+        "peak_passenger_acceleration_g": 1.3313439442756467,
+        "total_energy_cost_j": 311.1006620425094,
+        "max_protected_intrusion_m": 0.0
+      },
+      "after": {
+        "peak_contact_force_n": 22576.970395966586,
+        "mean_residual_damage": 0.14180073148062042,
+        "peak_passenger_acceleration_g": 1.3495554624918706,
+        "total_energy_cost_j": 307.51966044129324,
+        "max_protected_intrusion_m": 0.0
+      },
+      "reason": "No safe Pareto improvement; patch withheld"
+    }
+  ],
+  "scope": "Local virtual collective; no cloud service or automatic real-vehicle updates."
+}

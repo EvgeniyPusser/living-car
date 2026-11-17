@@ -1,0 +1,73 @@
+[
+  {
+    "parent": {
+      "generation": 1,
+      "parent": null,
+      "panels_per_side": 3,
+      "panel_stiffness": 90000.0,
+      "panel_damping": 1800.0,
+      "coupling_stiffness": 22000.0,
+      "yield_displacement": 0.035,
+      "max_retraction": 0.1,
+      "sensor_range": 0.38,
+      "response_gain": 42000.0,
+      "repair_rate": 0.018,
+      "engine_travel": 0.2,
+      "controller_version": "bounded-pd-v1",
+      "schema_version": 1
+    },
+    "parent_id": "408980bf741b",
+    "training_reference": {
+      "peak_contact_force_n": 19396.322509202233,
+      "mean_residual_damage": 0.09061317038881551,
+      "peak_passenger_acceleration_g": 1.1791145807952212,
+      "total_energy_cost_j": 205.3671793391339,
+      "max_protected_intrusion_m": 0.0
+    },
+    "validation_reference": {
+      "peak_contact_force_n": 23531.235324797544,
+      "mean_residual_damage": 0.1674731031517115,
+      "peak_passenger_acceleration_g": 1.3778645612773217,
+      "total_energy_cost_j": 361.38170648578597,
+      "max_protected_intrusion_m": 0.0
+    },
+    "proposals": [
+      {
+        "genome": {
+          "generation": 2,
+          "parent": "408980bf741b",
+          "panels_per_side": 3,
+          "panel_stiffness": 90000.0,
+          "panel_damping": 1997.2483549602937,
+          "coupling_stiffness": 21462.130269818063,
+          "yield_displacement": 0.035,
+          "max_retraction": 0.1093439167964553,
+          "sensor_range": 0.40763152406831094,
+          "response_gain": 42000.0,
+          "repair_rate": 0.018,
+          "engine_travel": 0.2,
+          "controller_version": "bounded-pd-v1",
+          "schema_version": 1
+        },
+        "id": "b9760b1446c4",
+        "training": {
+          "peak_contact_force_n": 19478.563724415082,
+          "mean_residual_damage": 0.08694804871074625,
+          "peak_passenger_acceleration_g": 1.1623647281703864,
+          "total_energy_cost_j": 199.89563586274411,
+          "max_protected_intrusion_m": 0.0
+        },
+        "validation": {
+          "peak_contact_force_n": 23777.205827028032,
+          "mean_residual_damage": 0.16297257934029027,
+          "peak_passenger_acceleration_g": 1.4184153582090848,
+          "total_energy_cost_j": 352.0209832919701,
+          "max_protected_intrusion_m": 0.0
+        },
+        "accepted": false,
+        "reason": "At least one metric regressed or no strict improvement"
+      }
+    ],
+    "note": "No scalar fitness; non-dominated trade-offs remain visible. Accepted designs require further independent validation."
+  }
+]
